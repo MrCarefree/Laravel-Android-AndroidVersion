@@ -25,6 +25,7 @@
             android:padding="20dp">
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nama : "
@@ -32,6 +33,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email : "
@@ -43,6 +45,7 @@
                 android:layout_marginTop="20dp"
                 android:background="#C00000"
                 android:text="Logout"
+                android:id="@+id/btnLogout"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
