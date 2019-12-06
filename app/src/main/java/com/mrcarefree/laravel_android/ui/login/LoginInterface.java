@@ -1,4 +1,4 @@
-package com.mrcarefree.laravel_android.ui;
+package com.mrcarefree.laravel_android.ui.login;
 
 import com.mrcarefree.laravel_android.data.model.login.ResponseLogin;
 

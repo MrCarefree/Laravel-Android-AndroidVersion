@@ -1,4 +1,4 @@
-package com.mrcarefree.laravel_android.ui;
+package com.mrcarefree.laravel_android.ui.register;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mrcarefree.laravel_android.R;
 import com.mrcarefree.laravel_android.Sessions;
 import com.mrcarefree.laravel_android.data.model.register.ResponseRegister;
+import com.mrcarefree.laravel_android.ui.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,9 +29,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     EditText etPassword;
 
     @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        getSupportActionBar().setTitle("Buat akun baru");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         unbinder = ButterKnife.bind(this);
         presenter  = new RegisterPresenter(this);

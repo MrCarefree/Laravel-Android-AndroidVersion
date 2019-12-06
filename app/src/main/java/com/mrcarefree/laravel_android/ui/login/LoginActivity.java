@@ -1,4 +1,4 @@
-package com.mrcarefree.laravel_android.ui;
+package com.mrcarefree.laravel_android.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mrcarefree.laravel_android.R;
 import com.mrcarefree.laravel_android.Sessions;
 import com.mrcarefree.laravel_android.data.model.login.ResponseLogin;
+import com.mrcarefree.laravel_android.ui.main.MainActivity;
+import com.mrcarefree.laravel_android.ui.register.RegisterActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +32,10 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if (!Sessions.getInstance(getApplicationContext()).getString(Sessions.email).equals("")){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
 
         unbinder = ButterKnife.bind(this);
         presenter  = new LoginPresenter(this);
@@ -61,11 +67,17 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.V
 
     @Override
     public void onResultLogin(ResponseLogin response) {
-        Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
-        Sessions.getInstance(getApplicationContext()).putString(Sessions.email, getEmail());
-        Sessions.getInstance(getApplicationContext()).putString(Sessions.name, response.getData().getName());
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        if (response.getStatus()){
+            Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+
+            Sessions.getInstance(getApplicationContext()).putString(Sessions.email, getEmail());
+            Sessions.getInstance(getApplicationContext()).putString(Sessions.name, response.getData().getName());
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }else{
+            Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
